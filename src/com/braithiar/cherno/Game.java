@@ -33,6 +33,8 @@ public class Game extends Canvas implements Runnable {
   public static final int HEIGHT = WIDTH / 16 * 9;
   public static final int SCALE = 3;
 
+  //TODO Refactor so Game.class controls all sizes/dimensions so they can be used in other classes
+
   public Game() {
     Dimension canvasSize = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
     this.setPreferredSize(canvasSize);
@@ -145,7 +147,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     screen.clear();
-    level.setCameraPlayerCenter(player.getX(), player.getY());
+    level.setCamera(player.getX(), player.getY());
     level.render(screen);
     player.render(screen);
 

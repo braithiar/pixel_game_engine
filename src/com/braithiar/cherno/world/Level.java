@@ -52,11 +52,25 @@ public abstract class Level {
     cameraY = y;
   }
 
-  public void setCameraPlayerCenter(int playerX, int playerY) {
+  private void setCameraPlayerCenter(int playerX, int playerY) {
     cameraX = playerX - MID_SCREEN_WIDTH;
     cameraY = playerY - MID_SCREEN_HEIGHT;
-    System.out.printf("camX: %d  camY: %d  playerX: %d  playerY: %d\n", cameraX,
-      cameraY, playerX, playerY);
+  }
+
+  public void setCamera(int playerX, int playerY) {
+    int cameraX = playerX;
+    int cameraY = playerY;
+
+    cameraX = cameraX < 0 ? 0 : cameraX;
+    cameraX = cameraX >= MAX_VIEW_WIDTH ? MAX_VIEW_WIDTH : cameraX;
+    cameraY = cameraY < 0 ? 0 : cameraY;
+    cameraY = cameraY >= MAX_VIEW_HEIGHT ? MAX_VIEW_HEIGHT : cameraY;
+
+    if (cameraY < 0 || cameraY >= MAX_VIEW_HEIGHT) {
+      cameraY = MAX_VIEW_HEIGHT;
+    }
+
+    setCameraPlayerCenter(cameraX, cameraY);
   }
 
   public int getCameraX() {
@@ -85,11 +99,6 @@ public abstract class Level {
     int y0 = getCameraY() >> TILE_POWER;
     // Add TILE_SIZE to mask tile loading at max mapHeight edge
     int y1 = (getCameraY() + screen.getHeight() + TILE_SIZE) >> TILE_POWER;
-
-    x0 = x0 < 0 ? 0 : x0;
-    x1 = x1 >= MAX_VIEW_WIDTH ? MAX_VIEW_WIDTH : x1;
-    y0 = y0 < 0 ? 0 : y0;
-    y1 = y1 >= MAX_VIEW_HEIGHT ? MAX_VIEW_HEIGHT : y1;
 
     screen.setOffset(getCameraX(), getCameraY());
     for (int y = y0; y < y1; ++y) {

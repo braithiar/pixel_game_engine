@@ -142,6 +142,12 @@ public class Player extends Mob {
     Mirror flip = getFlipDirection();
     setSpriteForRender();
 
+    //TODO replace magic numbers with calculated values from Level/Game classes.
+    x = x < 0 ? 0 : x;
+    x = x >= 1024 ? 1024 : x;
+    y = y < 0 ? 0 : y;
+    y = y >= 1024 ? 1024 : y;
+
     screen.renderPlayer(x, y, flip, getSprite());
   }
 
