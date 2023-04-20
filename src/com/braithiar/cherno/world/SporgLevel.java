@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class SporgLevel extends Level {
   public SporgLevel(String path, int screenWidth, int screenHeight) {
-    super(path, screenWidth, screenHeight);
+    super(path);
   }
 
   @Override

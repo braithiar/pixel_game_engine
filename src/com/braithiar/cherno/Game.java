@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable {
     image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     dataBufferPixels = ((DataBufferInt) image.getRaster().getDataBuffer())
       .getData();
-    level = Level.sporg;
+    level = Level.SPORG_LEVEL;
     sporgSpawn = new TileCoordinate(49, 9, Screen.getTileSize());
     screen = new Screen(WIDTH, HEIGHT);
     input = new Keyboard();
@@ -147,7 +147,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     screen.clear();
-    level.setCamera(player.getX(), player.getY());
+    level.getCamera().setCamera(player.getX(), player.getY());
     level.render(screen);
     player.render(screen);
 
