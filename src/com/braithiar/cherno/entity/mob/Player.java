@@ -144,9 +144,9 @@ public class Player extends Mob {
 
     //TODO replace magic numbers with calculated values from Level/Game classes.
     x = x < 0 ? 0 : x;
-    x = x >= 1024 ? 1024 : x;
+    x = x >= 1024 - Screen.getTileSize() ? 1024 - Screen.getTileSize() : x;
     y = y < 0 ? 0 : y;
-    y = y >= 1024 ? 1024 : y;
+    y = y >= 1024 - Screen.getTileSize() ? 1024 - Screen.getTileSize() : y;
 
     screen.renderPlayer(x, y, flip, getSprite());
   }
