@@ -152,6 +152,11 @@ public class Screen {
 
         int color = spritePixels[xSprite + (ySprite * TILE_SIZE)];
 
+        xAbsolute = xAbsolute < 0 ? 0 : xAbsolute;
+        xAbsolute = xAbsolute >= width ? (width - 1) : xAbsolute;
+        yAbsolute = yAbsolute < 0 ? 0 : yAbsolute;
+        yAbsolute = yAbsolute >= height ? (height - 1) : yAbsolute;
+
         if ((color >> 24) != 0x00) {
           pixels[xAbsolute + (yAbsolute * width)] = color;
         }

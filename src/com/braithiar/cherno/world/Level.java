@@ -7,7 +7,7 @@ import com.braithiar.cherno.world.tile.Tile;
 
 public abstract class Level {
   private final int MID_SCREEN_WIDTH, MID_SCREEN_HEIGHT, MAX_VIEW_WIDTH,
-    MAX_VIEW_HEIGHT;
+    MAX_VIEW_HEIGHT, MAX_CAMERA_X, MAX_CAMERA_Y;
   protected int mapWidth, mapHeight;
   protected int[] tiles;
   private int cameraX = 0;
@@ -36,6 +36,8 @@ public abstract class Level {
 
     MAX_VIEW_WIDTH = TILE_SIZE * mapWidth;
     MAX_VIEW_HEIGHT = TILE_SIZE * mapHeight;
+    MAX_CAMERA_X = MAX_VIEW_WIDTH - MID_SCREEN_WIDTH;
+    MAX_CAMERA_Y = MAX_VIEW_HEIGHT - MID_SCREEN_HEIGHT;
   }
 
   /**
@@ -61,14 +63,10 @@ public abstract class Level {
     int cameraX = playerX;
     int cameraY = playerY;
 
-    cameraX = cameraX < 0 ? 0 : cameraX;
-    cameraX = cameraX >= MAX_VIEW_WIDTH ? MAX_VIEW_WIDTH : cameraX;
-    cameraY = cameraY < 0 ? 0 : cameraY;
-    cameraY = cameraY >= MAX_VIEW_HEIGHT ? MAX_VIEW_HEIGHT : cameraY;
-
-    if (cameraY < 0 || cameraY >= MAX_VIEW_HEIGHT) {
-      cameraY = MAX_VIEW_HEIGHT;
-    }
+    cameraX = cameraX < MID_SCREEN_WIDTH ? MID_SCREEN_WIDTH : cameraX;
+    cameraX = cameraX >= MAX_CAMERA_X ? MAX_CAMERA_X : cameraX;
+    cameraY = cameraY < MID_SCREEN_HEIGHT ? MID_SCREEN_HEIGHT : cameraY;
+    cameraY = cameraY >= MAX_CAMERA_Y ? MAX_CAMERA_Y : cameraY;
 
     setCameraPlayerCenter(cameraX, cameraY);
   }
@@ -79,10 +77,6 @@ public abstract class Level {
 
   public int getCameraY() {
     return cameraY;
-  }
-
-  private boolean onMapEdge() {
-    return false;
   }
 
   protected abstract void loadLevel(String path);
