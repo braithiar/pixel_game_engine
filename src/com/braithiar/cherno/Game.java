@@ -16,18 +16,23 @@ import com.braithiar.cherno.input.Keyboard;
 import com.braithiar.cherno.world.Level;
 import com.braithiar.cherno.world.tile.TileCoordinate;
 
+/**
+ * 
+ * @author JT Paxton
+ *
+ */
 public class Game extends Canvas implements Runnable {
   private static final long serialVersionUID = 1L;
-  private final String TITLE = "Rain";
-  private JFrame frame;
+  private final String TITLE = "Derp";
+  private final JFrame frame;
   private boolean running;
-  private BufferedImage image;
-  private int[] dataBufferPixels;
-  private Level level;
+  private final BufferedImage image;
+  private final int[] dataBufferPixels;
+  private final Level level;
   private TileCoordinate sporgSpawn;
-  private Screen screen;
-  private Keyboard input;
-  private Player player;
+  private final Screen screen;
+  private final Keyboard input;
+  private final Player player;
 
   public static final int WIDTH = 300;
   public static final int HEIGHT = WIDTH / 16 * 9;
